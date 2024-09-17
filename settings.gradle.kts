@@ -21,4 +21,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "MovieSearch"
 include(":app")
- 
+include(":main_movies")
+include(":movie_detail")
+include(":data_remote")
+include(":theme")
