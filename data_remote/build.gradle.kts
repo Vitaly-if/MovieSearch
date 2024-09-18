@@ -38,6 +38,10 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     testImplementation(libs.junit)
+    implementation(libs.koin.android)
+    implementation(libs.koin.core)
+    implementation(libs.retrofit.core)
+    implementation(libs.retrofit.converter.gson)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 }

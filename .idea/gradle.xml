@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
@@ -12,6 +13,7 @@
             <option value="$PROJECT_DIR$/data_remote" />
             <option value="$PROJECT_DIR$/main_movies" />
             <option value="$PROJECT_DIR$/movie_detail" />
+            <option value="$PROJECT_DIR$/navigation" />
             <option value="$PROJECT_DIR$/theme" />
           </set>
         </option>
