@@ -37,12 +37,15 @@ android {
 
 dependencies {
     implementation(project(":navigation"))
+    implementation(project(":data_local"))
+    implementation(project(":theme"))
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
     implementation(libs.koin.android)
+    implementation(libs.glide)
     implementation(libs.koin.core)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
