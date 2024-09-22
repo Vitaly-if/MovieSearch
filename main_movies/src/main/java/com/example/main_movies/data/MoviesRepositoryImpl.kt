@@ -1,20 +1,41 @@
 package com.example.main_movies.data
 
 import api.ApiService
+import com.example.data_local.DataStoreManager
 import com.example.main_movies.domain.MoviesRepository
+import com.example.main_movies.domain.ServerResponseError
 import com.example.main_movies.domain.entity.FilmEntity
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.filterNotNull
 
-class MoviesRepositoryImpl(private val apiService: ApiService) : MoviesRepository {
-    private var defaultFilmEntity = MutableStateFlow<Result<List<FilmEntity>>?>(null)
-    override fun observeMovies(): Flow<Result<List<FilmEntity>>> =
-        defaultFilmEntity.asStateFlow().filterNotNull()
 
-    override suspend fun loadMovies() {
-        val movie = apiService.loadMovies()
-        defaultFilmEntity.value = Result.success(movie.films.map { it.toDomainMapped() })
+class MoviesRepositoryImpl(
+    private val apiService: ApiService,
+    private val dataStoreManager: DataStoreManager
+) : MoviesRepository, ThrowException {
+
+    override suspend fun loadMovies(): Result<List<FilmEntity>> = runCatching {
+
+        val response = apiService.loadMovies()
+        if (response.isSuccessful) {
+            return@runCatching response.body()?.films?.map { it.toDomainMapped() } ?: listOf()
+        } else {
+            throw throwException(response.code())
+        }
     }
+
+    override suspend fun saveMovie(filmEntity: FilmEntity): Result<Unit> {
+        dataStoreManager.saveMyObject(filmEntity.toCache())
+        return Result.success(Unit)
+    }
+
+    override fun throwException(code: Int): ServerResponseError {
+        return when (code) {
+            in 500..599 -> ServerResponseError.ServerException
+            in 400..499 -> ServerResponseError.BadRequestException
+            else -> ServerResponseError.ServerException
+        }
+    }
+}
+
+interface ThrowException {
+    fun throwException(code: Int): ServerResponseError
 }

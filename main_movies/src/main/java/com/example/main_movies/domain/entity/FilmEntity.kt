@@ -1,5 +1,7 @@
 package com.example.main_movies.domain.entity
 
+import com.example.main_movies.presentation.Genre
+
 data class FilmEntity(
     val id: Int,
     val localizedName: String,

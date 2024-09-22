@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="genre">Жанры</string>
+    <string name="films">Фильмы</string>
+    <string name="retry">Повториь</string>
+    <string name="io_exception">Ошибка подключения к сети</string>
+    <string name="server_exception">Ошибка сервера</string>
+    <string name="bed_request">Ошибка запроса</string>
+    <string name="unknown_exception">Неизвестная ошибка</string>
+</resources>

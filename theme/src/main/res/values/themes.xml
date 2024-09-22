@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base application theme. -->
+    <style name="Theme.App" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/md_theme_light_primary</item>
+        <item name="colorOnPrimary">@color/md_theme_light_onPrimary</item>
+        <item name="colorPrimaryContainer">@color/md_theme_light_primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/md_theme_light_onPrimaryContainer</item>
+        <item name="colorSecondary">@color/md_theme_light_secondary</item>
+        <item name="colorOnSecondary">@color/md_theme_light_onSecondary</item>
+        <item name="android:colorBackground">@color/md_theme_light_background</item>
+        <item name="colorOnSurface">@color/md_theme_light_onSurface</item>
+    </style>
+    <style name="MyThemeOverlay_Toolbar" parent="ThemeOverlay.MaterialComponents.Toolbar.Primary">
+        <!-- color used by navigation icon and overflow icon -->
+<!--        <item name="colorOnPrimary">?colorOnPrimary</item>-->
+    </style>
+    <style name="ToolbarColor" parent="Theme.App">
+        <item name="android:textColorSecondary">@color/md_theme_light_onPrimary</item>
+    </style>
+</resources>
