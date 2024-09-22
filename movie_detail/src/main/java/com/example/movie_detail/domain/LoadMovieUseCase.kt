@@ -1,5 +1,5 @@
 package com.example.movie_detail.domain
 
-class LoadMovieUseCase {
-    fun invoke(){}
+class LoadMovieUseCase(private val movieDetailRepository: MovieDetailRepository) {
+    suspend fun invoke() = movieDetailRepository.loadMovieFromCache()
 }
