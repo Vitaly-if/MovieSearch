@@ -3,12 +3,20 @@ package com.example.main_movies.presentation
 import com.example.main_movies.R
 import com.example.main_movies.domain.ServerResponseError
 import com.example.main_movies.domain.entity.FilmEntity
+import com.example.main_movies.domain.use_cases.GetGenresBySelectedGenre
+import com.example.main_movies.domain.use_cases.GetListFilmsBySelectedGenreUseCase
+import com.example.main_movies.domain.use_cases.MergedGenreFromAllFilmsUseCase
+import com.example.main_movies.domain.use_cases.SortByFilmNameUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import java.io.IOException
 
 class MoviesStateDelegate(
+    private val mergedGenreFromAllFilmsUseCase: MergedGenreFromAllFilmsUseCase,
+    private val getListFilmsBySelectedGenreUseCase: GetListFilmsBySelectedGenreUseCase,
+    private val sortByFilmNameUseCase: SortByFilmNameUseCase,
+    private val getGenresBySelectedGenre: GetGenresBySelectedGenre
 ) :
     HandleSateUi,
     ActionMovies,
@@ -20,18 +28,14 @@ class MoviesStateDelegate(
         get() = _state
 
     override fun clickOnGenre(genreSelected: Genre) {
-        val listFilms = _state.value.copy()
-        val filterFilms = if (!genreSelected.selected)
-            listFilms.filmEntitiesDefault.filter { it.genres.contains(genreSelected.name) } else listFilms.filmEntitiesDefault
-
+        val filterFilms = getListFilmsBySelectedGenreUseCase.invoke(
+            genreSelected,
+            _state.value.copy().filmEntitiesDefault
+        )
         _state.update {
             it.copy(
-                filmEntities = filterFilms.sortedBy { film -> film.localizedName },
-                genres = it.genres.map { genre ->
-                    if (genreSelected == genre)
-                        genre.copy(selected = !genre.selected)
-                    else genre.copy(selected = false)
-                }
+                filmEntities = sortByFilmNameUseCase.invoke(filterFilms),
+                genres = getGenresBySelectedGenre.invoke(it.genres, genreSelected)
             )
         }
     }
@@ -54,13 +58,13 @@ class MoviesStateDelegate(
 
     override fun showSuccess(result: Result<List<FilmEntity>>) {
         result.getOrNull()?.let { filmEntities ->
-            val films = filmEntities.sortedBy { film -> film.localizedName }
+            val films = sortByFilmNameUseCase.invoke(filmEntities)
             _state.update {
                 it.copy(
                     loadingState = LoadingState.Success,
                     filmEntities = films,
                     filmEntitiesDefault = films,
-                    genres = filmEntities.getAllGenres()
+                    genres = mergedGenreFromAllFilmsUseCase.invoke(filmEntities)
                 )
             }
         }
@@ -71,9 +75,4 @@ class MoviesStateDelegate(
     }
 
 
-    private fun List<FilmEntity>.getAllGenres(): List<Genre> {
-        val mergedList = mutableListOf<String>()
-        this.forEach { mergedList.addAll(it.genres) }
-        return mergedList.toSet().sorted().map { Genre(name = it) }.toList()
-    }
 }
