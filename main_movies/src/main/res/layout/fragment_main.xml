@@ -15,7 +15,7 @@
             android:id="@+id/groupMovies"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:constraint_referenced_ids="title_genre,genre_items_recycler,films_items_recycler,button_navigation, title_films,get_movie"
+            app:constraint_referenced_ids="title_genre,genre_items_recycler,films_items_recycler, title_films"
             tools:ignore="MissingConstraints" />
 
         <TextView
