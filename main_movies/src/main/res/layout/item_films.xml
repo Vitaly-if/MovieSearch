@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="16.dp"
+    android:layout_marginTop="@dimen/main_margin"
     android:orientation="vertical">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card_poster"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="8dp"
+        app:cardCornerRadius="@dimen/half_margin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -31,7 +31,7 @@
         android:id="@+id/movie_name"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/half_margin"
         android:ellipsize="end"
         android:maxLines="2"
         android:textAppearance="@style/BodyLargeBold"

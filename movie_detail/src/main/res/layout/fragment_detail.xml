@@ -1,99 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fillViewport="true">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/card_poster"
-        android:layout_width="160dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="114dp"
-        android:layout_marginTop="24dp"
-        app:cardCornerRadius="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/film_poster"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@drawable/films_place_holder"
-            android:scaleType="fitXY"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_poster"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="114dp"
+            android:layout_marginTop="@dimen/extra_margin"
+            app:cardCornerRadius="@dimen/half_margin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </com.google.android.material.card.MaterialCardView>
+            app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/title_movie"
-        style="@style/TitleBold"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/card_poster" />
-
-    <com.example.movie_detail.presentation.custom_view.GenreTextView
-        android:id="@+id/genre_year"
-        style="@style/BodyMedium"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:textColor="?colorOnSurface"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/title_movie"
-        tools:text="драма, 2017 год" />
-
-    <LinearLayout
-        android:id="@+id/rating_area"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/genre_year">
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/film_poster"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/films_place_holder"
+                android:scaleType="fitXY"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </com.google.android.material.card.MaterialCardView>
 
         <TextView
-            android:id="@+id/rating"
-            style="@style/TitleMedium"
+            android:id="@+id/title_movie"
+            style="@style/TitleBold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/main_margin"
+            android:layout_marginTop="@dimen/extra_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/card_poster" />
+
+        <com.example.movie_detail.presentation.custom_view.GenreTextView
+            android:id="@+id/genre_year"
+            style="@style/BodyMedium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/main_margin"
+            android:layout_marginTop="@dimen/half_margin"
+            android:textColor="?colorOnSurface"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title_movie"
+            tools:text="драма, 2017 год" />
+
+        <LinearLayout
+            android:id="@+id/rating_area"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingStart="16dp"
-            android:textColor="?colorPrimary"
-            tools:text="6.7" />
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/genre_year">
+
+            <TextView
+                android:id="@+id/rating"
+                style="@style/TitleMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/main_margin"
+                android:textColor="?colorPrimary"
+                tools:text="6.7" />
+
+            <TextView
+                android:id="@+id/source_rating"
+                style="@style/TitleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/half_margin"
+                android:text="@string/movie_search"
+                android:textColor="?colorPrimary"
+                app:layout_constraintStart_toEndOf="@id/rating"
+                app:layout_constraintTop_toBottomOf="@id/genre_year" />
+
+        </LinearLayout>
+
 
         <TextView
-            android:id="@+id/source_rating"
-            style="@style/TitleSmall"
-            android:layout_width="wrap_content"
+            android:id="@+id/description"
+            style="@style/BodySmall"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="@string/movie_search"
-            android:textColor="?colorPrimary"
-            app:layout_constraintStart_toEndOf="@id/rating"
-            app:layout_constraintTop_toBottomOf="@id/genre_year" />
+            android:layout_marginStart="@dimen/main_margin"
+            android:paddingTop="@dimen/margin_14dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rating_area"
+            tools:text="Бен и Алекс, уцелевшие после авиакатастрофы..." />
 
-    </LinearLayout>
-
-
-    <TextView
-        android:id="@+id/description"
-        style="@style/BodySmall"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:paddingTop="14dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rating_area"
-        tools:text="Бен и Алекс, уцелевшие после авиакатастрофы..." />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
